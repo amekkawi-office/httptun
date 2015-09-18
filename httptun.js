@@ -5,6 +5,7 @@ var socks5 = require('simple-socks');
 var fmt = require('util').format;
 var dns = require('dns');
 var yargs = require('yargs');
+var dateformat = require('dateformat');
 
 var args = yargs
 	.usage('Usage: $0 -u <username> -p <password>')
@@ -155,9 +156,13 @@ function socksServer() {
 }
 
 function log() {
-	return console.log('[' + new Date().toUTCString() + '] ' + fmt.apply(null, arguments));
+	return console.log('[' + logDate() + '] ' + fmt.apply(null, arguments));
 }
 
 function logerr() {
-	return console.error('[' + new Date().toUTCString() + '] ' + fmt.apply(null, arguments));
+	return console.error('[' + logDate() + '] ' + fmt.apply(null, arguments));
+}
+
+function logDate() {
+	return dateformat(new Date(), 'ddd dd mmm yyyy HH:MM:ss o')
 }
